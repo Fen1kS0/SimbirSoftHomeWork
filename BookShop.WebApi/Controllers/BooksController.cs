@@ -38,5 +38,24 @@ namespace BookShop.WebApi.Controllers
         {
             return Ok(_mockDb.Books.Where(b => b.Author.Id == authorId));
         }
+
+        /// <summary>
+        /// 1.2 - 5
+        /// </summary>
+        [HttpPost]
+        public ActionResult<IEnumerable<Book>> CreateBook(Book book)
+        {
+            var author = _mockDb.People.FirstOrDefault(p => p.Id == book.AuthorId);
+
+            if (author == null)
+            {
+                return BadRequest();
+            }
+
+            book.Author = author;
+            _mockDb.Books.Add(book);
+
+            return Ok(_mockDb.Books);
+        }
     }
 }

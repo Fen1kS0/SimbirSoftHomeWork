@@ -18,7 +18,12 @@ namespace BookShop.WebApi.Models
         /// 1.2 - 2
         /// </summary>
         public string Title { get; set; }
-
+        
+        /// <summary>
+        /// Для поиска автора
+        /// </summary>
+        public Guid AuthorId { get; set; }
+        
         /// <summary>
         /// 1.2 - 2
         /// </summary>

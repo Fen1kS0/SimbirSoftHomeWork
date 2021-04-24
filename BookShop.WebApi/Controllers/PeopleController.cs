@@ -37,5 +37,16 @@ namespace BookShop.WebApi.Controllers
         {
             return Ok(_mockDb.People.Where(p => p.Name == name));
         }
+
+        /// <summary>
+        /// 1.2 - 5
+        /// </summary>
+        [HttpPost]
+        public ActionResult<IEnumerable<Person>> CreatePeople(Person person)
+        {
+            _mockDb.People.Add(person);
+
+            return Ok(_mockDb.People);
+        }
     }
 }
