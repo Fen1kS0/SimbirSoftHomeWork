@@ -57,5 +57,20 @@ namespace BookShop.WebApi.Controllers
 
             return Ok(_mockDb.Books);
         }
+
+        [HttpDelete("{id}")]
+        public ActionResult<Book> DeleteBook(Guid id)
+        {
+            var book = _mockDb.Books.FirstOrDefault(b => b.Id == id);
+
+            if (book == null)
+            {
+                return NotFound();
+            }
+
+            _mockDb.Books.Remove(book);
+
+            return Ok(book);
+        }
     }
 }

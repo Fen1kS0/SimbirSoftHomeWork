@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using BookShop.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -47,6 +48,24 @@ namespace BookShop.WebApi.Controllers
             _mockDb.People.Add(person);
 
             return Ok(_mockDb.People);
+        }
+
+        /// <summary>
+        /// 1.2 - 6
+        /// </summary>
+        [HttpDelete("{id}")]
+        public ActionResult<Person> DeletePerson(Guid id)
+        {
+            var person = _mockDb.People.FirstOrDefault(p => p.Id == id);
+
+            if (person == null)
+            {
+                return NotFound();
+            }
+
+            _mockDb.People.Remove(person);
+
+            return Ok(person);
         }
     }
 }
