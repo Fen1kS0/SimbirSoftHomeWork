@@ -1,10 +1,19 @@
-﻿namespace BookShop.WebApi.Models
+﻿using System;
+
+namespace BookShop.WebApi.Models
 {
     /// <summary>
     /// 1.2 - 2
     /// </summary>
     public class Book
     {
+        public Book()
+        {
+            Id = Guid.NewGuid();
+        }
+        
+        public Guid Id { get; set; }
+        
         /// <summary>
         /// 1.2 - 2
         /// </summary>

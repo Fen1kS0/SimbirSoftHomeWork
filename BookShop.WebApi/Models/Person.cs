@@ -7,6 +7,13 @@ namespace BookShop.WebApi.Models
     /// </summary>
     public class Person
     {
+        public Person()
+        {
+            Id = Guid.NewGuid();
+        }
+        
+        public Guid Id { get; set; }
+        
         /// <summary>
         /// 1.2 - 2
         /// </summary>
