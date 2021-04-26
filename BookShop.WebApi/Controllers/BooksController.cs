@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using BookShop.WebApi.Data;
 using BookShop.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
 
@@ -58,6 +59,9 @@ namespace BookShop.WebApi.Controllers
             return Ok(_mockDb.Books);
         }
 
+        /// <summary>
+        /// 1.2 - 6
+        /// </summary>
         [HttpDelete("{id}")]
         public ActionResult<Book> DeleteBook(Guid id)
         {

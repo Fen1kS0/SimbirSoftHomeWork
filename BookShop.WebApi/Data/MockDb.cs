@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BookShop.WebApi.Models;
 
-namespace BookShop.WebApi
+namespace BookShop.WebApi.Data
 {
     public class MockDb
     {
@@ -15,6 +15,8 @@ namespace BookShop.WebApi
 
         public List<Book> Books { get; set; }
 
+        public List<OrderBook> OrderBooks { get; set; }
+
         private void InitialDb()
         {
             var people = new List<Person>()
@@ -25,6 +27,13 @@ namespace BookShop.WebApi
                     Surname = "Ivanov",
                     Patronymic = "Evgenich",
                     BirthDate = new DateTime(1980, 12, 30)
+                },
+                new Person()
+                {
+                    Name = "Geana",
+                    Surname = "Kalikin",
+                    Patronymic = "Avraamovich",
+                    BirthDate = new DateTime(1995, 05, 12)
                 }
             };
             
@@ -39,8 +48,11 @@ namespace BookShop.WebApi
                 }
             };
 
+            var orderBooks = new List<OrderBook>();
+
             People = people;
             Books = books;
+            OrderBooks = orderBooks;
         }
     }
 }
