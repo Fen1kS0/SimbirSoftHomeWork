@@ -1,37 +1,37 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookShop.WebApi.Models
 {
     /// <summary>
     /// 1.2 - 2
+    /// 1.2.2 - 1
     /// </summary>
     public class Book
     {
-        public Book()
-        {
-            Id = Guid.NewGuid();
-        }
-        
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
         
         /// <summary>
         /// 1.2 - 2
+        /// 1.2.2 - 1
         /// </summary>
+        [Required]
         public string Title { get; set; }
         
-        /// <summary>
-        /// Для поиска автора
-        /// </summary>
         public Guid AuthorId { get; set; }
         
         /// <summary>
         /// 1.2 - 2
+        /// 1.2.2 - 1
         /// </summary>
+        [Required]
         public Person Author { get; set; }
 
         /// <summary>
         /// 1.2 - 2
+        /// 1.2.2 - 1
         /// </summary>
+        [Required]
         public string Genre { get; set; }
     }
 }

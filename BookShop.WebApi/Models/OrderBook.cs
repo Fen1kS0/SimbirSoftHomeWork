@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace BookShop.WebApi.Models
 {
@@ -7,26 +8,29 @@ namespace BookShop.WebApi.Models
     /// </summary>
     public class OrderBook
     {
-        public OrderBook()
-        {
-            Id = new Guid();
-        }
-        
-        public Guid Id { get; set; }
+        public Guid Id { get; set; } = Guid.NewGuid();
+
+        public Guid BookId { get; set; }
 
         /// <summary>
         /// 1.2.1 - 1
+        /// 1.2.2 - 1
         /// </summary>
+        [Required]
         public Book Book { get; set; }
 
+        public Guid BuyerId { get; set; }
+
         /// <summary>
         /// 1.2.1 - 1
+        /// 1.2.2 - 1
         /// </summary>
+        [Required]
         public Person Buyer { get; set; }
 
         /// <summary>
         /// 1.2.1 - 1
         /// </summary>
-        public DateTime DateTimeOffset { get; set; }
+        public DateTimeOffset TimeGetBook { get; set; }
     }
 }
