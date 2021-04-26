@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using BookShop.WebApi.Convertors;
 using BookShop.WebApi.Data;
 using BookShop.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -42,6 +44,7 @@ namespace BookShop.WebApi.Controllers
 
         /// <summary>
         /// 1.2 - 5
+        /// 1.2.2 - 2
         /// </summary>
         [HttpPost]
         public ActionResult<IEnumerable<Book>> CreateBook(Book book)
@@ -56,9 +59,19 @@ namespace BookShop.WebApi.Controllers
             book.Author = author;
             _mockDb.Books.Add(book);
 
-            return Ok(_mockDb.Books);
-        }
+            var options = new JsonSerializerOptions()
+            {
+                Converters =
+                {
+                    new BooksResponseJsonConverter()
+                }
+            };
 
+            var response = JsonSerializer.Serialize(_mockDb.Books, options);
+
+            return Ok(response);
+        }
+        
         /// <summary>
         /// 1.2 - 6
         /// </summary>

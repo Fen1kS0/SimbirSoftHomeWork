@@ -22,9 +22,7 @@ namespace BookShop.WebApi.Models
         
         /// <summary>
         /// 1.2 - 2
-        /// 1.2.2 - 1
         /// </summary>
-        [Required]
         public Person Author { get; set; }
 
         /// <summary>

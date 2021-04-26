@@ -1,5 +1,4 @@
 ﻿using System;
-using System.ComponentModel.DataAnnotations;
 
 namespace BookShop.WebApi.Models
 {
@@ -14,18 +13,14 @@ namespace BookShop.WebApi.Models
 
         /// <summary>
         /// 1.2.1 - 1
-        /// 1.2.2 - 1
         /// </summary>
-        [Required]
         public Book Book { get; set; }
 
         public Guid BuyerId { get; set; }
 
         /// <summary>
         /// 1.2.1 - 1
-        /// 1.2.2 - 1
         /// </summary>
-        [Required]
         public Person Buyer { get; set; }
 
         /// <summary>

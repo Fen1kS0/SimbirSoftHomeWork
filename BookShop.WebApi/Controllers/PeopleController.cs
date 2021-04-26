@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.Json;
+using BookShop.WebApi.Convertors;
 using BookShop.WebApi.Data;
 using BookShop.WebApi.Models;
 using Microsoft.AspNetCore.Mvc;
@@ -42,13 +44,24 @@ namespace BookShop.WebApi.Controllers
 
         /// <summary>
         /// 1.2 - 5
+        /// 1.2.2 - 2
         /// </summary>
         [HttpPost]
         public ActionResult<IEnumerable<Person>> CreatePeople(Person person)
         {
             _mockDb.People.Add(person);
+            
+            var options = new JsonSerializerOptions()
+            {
+                Converters =
+                {
+                    new PeopleResponseJsonConverter()
+                }
+            };
 
-            return Ok(_mockDb.People);
+            var response = JsonSerializer.Serialize(_mockDb.People, options);
+
+            return Ok(response);
         }
 
         /// <summary>
