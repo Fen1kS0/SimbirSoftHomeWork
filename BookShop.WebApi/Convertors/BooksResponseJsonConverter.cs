@@ -28,7 +28,7 @@ namespace BookShop.WebApi.Convertors
             writer.WriteStartObject();
             
             writer.WriteString(nameof(Book.Title).ToLowerInvariant(), value.Title);
-            writer.WriteString(nameof(Book.Author.Name).ToLowerInvariant(), value.Author.Name);
+            writer.WriteString("authorName", value.Author.Name);
             
             writer.WriteEndObject();
         }

@@ -39,6 +39,9 @@ namespace BookShop.WebApi.Controllers
         [HttpGet("author/{authorId}")]
         public ActionResult<IEnumerable<Book>> GetBooksByAuthor(Guid authorId)
         {
+            if (!_mockDb.People.Exists(a => a.Id == authorId))
+                return NotFound();
+            
             return Ok(_mockDb.Books.Where(b => b.Author.Id == authorId));
         }
 
