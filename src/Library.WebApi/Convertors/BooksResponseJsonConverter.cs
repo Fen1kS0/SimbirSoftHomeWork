@@ -3,14 +3,14 @@ using System.Text.Json;
 using System.Text.Json.Serialization;
 using BookShop.WebApi.Models;
 
-namespace BookShop.WebApi.Convertors
+namespace Library.WebApi.Convertors
 {
     /// <summary>
     /// 1.2.2 - 2
     /// </summary>
-    public class PeopleResponseJsonConverter : JsonConverter<Person>
+    public class BooksResponseJsonConverter : JsonConverter<Book>
     {
-        public override Person Read(
+        public override Book Read(
             ref Utf8JsonReader reader, 
             Type typeToConvert, 
             JsonSerializerOptions options
@@ -21,15 +21,14 @@ namespace BookShop.WebApi.Convertors
 
         public override void Write(
             Utf8JsonWriter writer, 
-            Person value, 
+            Book value, 
             JsonSerializerOptions options
             )
         {
             writer.WriteStartObject();
             
-            writer.WriteString(nameof(Person.Name).ToLowerInvariant(), value.Name);
-            writer.WriteString(nameof(Person.Surname).ToLowerInvariant(), value.Surname);
-            writer.WriteString(nameof(Person.Patronymic).ToLowerInvariant(), value.Patronymic);
+            writer.WriteString(nameof(Book.Title).ToLowerInvariant(), value.Title);
+            writer.WriteString("authorName", value.Author.Name);
             
             writer.WriteEndObject();
         }

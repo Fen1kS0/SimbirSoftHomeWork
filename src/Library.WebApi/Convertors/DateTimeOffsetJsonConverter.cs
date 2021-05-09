@@ -3,7 +3,7 @@ using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
-namespace BookShop.WebApi.Convertors
+namespace Library.WebApi.Convertors
 {
     /// <summary>
     /// 1.2.1 - 4

@@ -1,7 +1,7 @@
-﻿using BookShop.WebApi.Convertors;
+﻿using Library.WebApi.Convertors;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace BookShop.WebApi.Extensions
+namespace Library.WebApi.Extensions
 {
     /// <summary>
     /// 1.2.1 - 4

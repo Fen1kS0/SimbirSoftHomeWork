@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.Json;
-using BookShop.WebApi.Convertors;
-using BookShop.WebApi.Data;
 using BookShop.WebApi.Models;
+using Library.WebApi.Convertors;
+using Library.WebApi.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookShop.WebApi.Controllers
+namespace Library.WebApi.Controllers
 {
     /// <summary>
     /// 1.2 - 3,

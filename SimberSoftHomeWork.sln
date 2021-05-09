@@ -5,7 +5,7 @@ VisualStudioVersion = 16.0.31205.134
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{904470AB-86C0-4B3B-92FF-EDC05CE57511}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BookShop.WebApi", "BookShop.WebApi\BookShop.WebApi.csproj", "{660075A2-952C-42CD-8669-97E9D7D8CABD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Library.WebApi", "src\Library.WebApi\Library.WebApi.csproj", "{244CC867-5EBE-45FC-B7E1-4E493D9100AE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -13,16 +13,16 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{660075A2-952C-42CD-8669-97E9D7D8CABD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{660075A2-952C-42CD-8669-97E9D7D8CABD}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{660075A2-952C-42CD-8669-97E9D7D8CABD}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{660075A2-952C-42CD-8669-97E9D7D8CABD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{244CC867-5EBE-45FC-B7E1-4E493D9100AE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{244CC867-5EBE-45FC-B7E1-4E493D9100AE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{244CC867-5EBE-45FC-B7E1-4E493D9100AE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{244CC867-5EBE-45FC-B7E1-4E493D9100AE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{660075A2-952C-42CD-8669-97E9D7D8CABD} = {904470AB-86C0-4B3B-92FF-EDC05CE57511}
+		{244CC867-5EBE-45FC-B7E1-4E493D9100AE} = {904470AB-86C0-4B3B-92FF-EDC05CE57511}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {11DA0C09-3320-48F3-9EF4-3977FC4593CE}

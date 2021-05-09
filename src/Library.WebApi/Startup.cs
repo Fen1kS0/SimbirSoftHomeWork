@@ -1,12 +1,12 @@
-using BookShop.WebApi.Data;
+using Library.WebApi.Data;
+using Library.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using BookShop.WebApi.Extensions;
 
-namespace BookShop.WebApi
+namespace Library.WebApi
 {
     public class Startup
     {

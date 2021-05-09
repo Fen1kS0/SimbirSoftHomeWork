@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using BookShop.WebApi.Data;
 using BookShop.WebApi.Models;
+using Library.WebApi.Data;
 using Microsoft.AspNetCore.Mvc;
 
-namespace BookShop.WebApi.Controllers
+namespace Library.WebApi.Controllers
 {
     /// <summary>
     /// 1.2.1 - 2

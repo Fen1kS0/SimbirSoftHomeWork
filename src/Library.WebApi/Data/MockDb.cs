@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using BookShop.WebApi.Models;
 
-namespace BookShop.WebApi.Data
+namespace Library.WebApi.Data
 {
     public class MockDb
     {
