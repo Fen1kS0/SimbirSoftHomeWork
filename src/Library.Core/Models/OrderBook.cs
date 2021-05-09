@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Library.WebApi.Models
+namespace Library.Core.Models
 {
     /// <summary>
     /// 1.2.1 - 1

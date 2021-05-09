@@ -1,13 +1,13 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Library.WebApi.Models
+namespace Library.Core.Models
 {
     /// <summary>
     /// 1.2 - 2
     /// 1.2.2 - 1
     /// </summary>
-    public class Person
+    public class Book
     {
         public Guid Id { get; set; } = Guid.NewGuid();
         
@@ -16,25 +16,20 @@ namespace Library.WebApi.Models
         /// 1.2.2 - 1
         /// </summary>
         [Required]
-        public string Name { get; set; }
+        public string Title { get; set; }
+        
+        public Guid AuthorId { get; set; }
+        
+        /// <summary>
+        /// 1.2 - 2
+        /// </summary>
+        public Person Author { get; set; }
 
         /// <summary>
         /// 1.2 - 2
         /// 1.2.2 - 1
         /// </summary>
         [Required]
-        public string Surname { get; set; }
-
-        /// <summary>
-        /// 1.2 - 2
-        /// 1.2.2 - 1
-        /// </summary>
-        [Required]
-        public string Patronymic { get; set; }
-
-        /// <summary>
-        /// 1.2 - 2
-        /// </summary>
-        public DateTime BirthDate { get; set; }
+        public string Genre { get; set; }
     }
 }

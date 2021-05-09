@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace Library.WebApi.Models
+namespace Library.Core.Models
 {
     /// <summary>
     /// 1.2 - 2

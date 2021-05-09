@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using BookShop.WebApi.Models;
+using Library.WebApi.Models;
 
 namespace Library.WebApi.Data
 {
