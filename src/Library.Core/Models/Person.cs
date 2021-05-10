@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace Library.Core.Models
@@ -16,25 +17,27 @@ namespace Library.Core.Models
         /// 1.2.2 - 1
         /// </summary>
         [Required]
-        public string Name { get; set; }
+        public string FirstName { get; set; }
 
         /// <summary>
         /// 1.2 - 2
         /// 1.2.2 - 1
         /// </summary>
         [Required]
-        public string Surname { get; set; }
+        public string LastName { get; set; }
 
         /// <summary>
         /// 1.2 - 2
         /// 1.2.2 - 1
         /// </summary>
         [Required]
-        public string Patronymic { get; set; }
+        public string MiddleName { get; set; }
 
         /// <summary>
         /// 1.2 - 2
         /// </summary>
         public DateTime BirthDate { get; set; }
+
+        public ICollection<Book> Books { get; set; }
     }
 }

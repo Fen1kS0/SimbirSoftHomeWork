@@ -21,7 +21,7 @@ namespace Library.Core.Models
         /// <summary>
         /// 1.2.1 - 1
         /// </summary>
-        public Person Buyer { get; set; }
+        public Person Person { get; set; }
 
         /// <summary>
         /// 1.2.1 - 1

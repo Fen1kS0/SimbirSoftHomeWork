@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Library.WebApi.Models;
+using Library.Core.Models;
 
 namespace Library.WebApi.Convertors
 {
@@ -27,9 +27,9 @@ namespace Library.WebApi.Convertors
         {
             writer.WriteStartObject();
             
-            writer.WriteString(nameof(Person.Name).ToLowerInvariant(), value.Name);
-            writer.WriteString(nameof(Person.Surname).ToLowerInvariant(), value.Surname);
-            writer.WriteString(nameof(Person.Patronymic).ToLowerInvariant(), value.Patronymic);
+            writer.WriteString(nameof(Person.FirstName).ToLowerInvariant(), value.FirstName);
+            writer.WriteString(nameof(Person.LastName).ToLowerInvariant(), value.LastName);
+            writer.WriteString(nameof(Person.MiddleName).ToLowerInvariant(), value.MiddleName);
             
             writer.WriteEndObject();
         }

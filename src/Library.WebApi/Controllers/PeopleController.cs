@@ -1,10 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using Library.WebApi.Convertors;
-using Library.WebApi.Data;
-using Library.WebApi.Models;
+using Library.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.WebApi.Controllers
@@ -17,20 +13,13 @@ namespace Library.WebApi.Controllers
     [Route("api/[controller]")]
     public class PeopleController : ControllerBase
     {
-        private readonly MockDb _mockDb;
-
-        public PeopleController(MockDb mockDb)
-        {
-            _mockDb = mockDb;
-        }
-
         /// <summary>
         /// 1.2 - 4.a
         /// </summary>
         [HttpGet]
         public ActionResult<IEnumerable<Person>> GetAllPeople()
         {
-            return Ok(_mockDb.People);
+            return Ok();
         }
         
         /// <summary>
@@ -39,7 +28,7 @@ namespace Library.WebApi.Controllers
         [HttpGet("name/{name}")]
         public ActionResult<IEnumerable<Person>> GetAllPeopleByName(string name)
         {
-            return Ok(_mockDb.People.Where(p => p.Name == name));
+            return Ok();
         }
 
         /// <summary>
@@ -49,19 +38,7 @@ namespace Library.WebApi.Controllers
         [HttpPost]
         public ActionResult<IEnumerable<Person>> CreatePeople(Person person)
         {
-            _mockDb.People.Add(person);
-            
-            var options = new JsonSerializerOptions()
-            {
-                Converters =
-                {
-                    new PeopleResponseJsonConverter()
-                }
-            };
-
-            var response = JsonSerializer.Serialize(_mockDb.People, options);
-
-            return Ok(response);
+            return Ok();
         }
 
         /// <summary>
@@ -70,16 +47,7 @@ namespace Library.WebApi.Controllers
         [HttpDelete("{id}")]
         public ActionResult<Person> DeletePerson(Guid id)
         {
-            var person = _mockDb.People.FirstOrDefault(p => p.Id == id);
-
-            if (person == null)
-            {
-                return NotFound();
-            }
-
-            _mockDb.People.Remove(person);
-
-            return Ok(person);
+            return Ok();
         }
     }
 }

@@ -1,7 +1,8 @@
-using Library.WebApi.Data;
+using Library.Infrastructure.Data;
 using Library.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
@@ -19,7 +20,8 @@ namespace Library.WebApi
         
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddSingleton<MockDb>();
+            services.AddDbContext<LibraryDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddJsonConverters();
             
@@ -34,8 +36,6 @@ namespace Library.WebApi
             }
 
             app.UseRouting();
-
-            app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>
             {

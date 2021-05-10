@@ -1,8 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using Library.WebApi.Data;
-using Library.WebApi.Models;
+using Library.Core.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.WebApi.Controllers
@@ -15,17 +13,10 @@ namespace Library.WebApi.Controllers
     [Route("api/[controller]")]
     public class OrderBooksController : ControllerBase
     {
-        private readonly MockDb _mockDb;
-
-        public OrderBooksController(MockDb mockDb)
-        {
-            _mockDb = mockDb;
-        }
-
         [HttpGet]
         public ActionResult<IEnumerable<OrderBook>> GetAllOrder()
         {
-            return Ok(_mockDb.OrderBooks);
+            return Ok();
         }
 
         /// <summary>
@@ -34,21 +25,7 @@ namespace Library.WebApi.Controllers
         [HttpPost]
         public ActionResult<IEnumerable<OrderBook>> CreateOrderBook(OrderBook orderBook)
         {
-            var book = _mockDb.Books.FirstOrDefault(b => b.Id == orderBook.BookId);
-            var buyer = _mockDb.People.FirstOrDefault(p => p.Id == orderBook.BuyerId);
-
-            if (book == null || buyer == null)
-            {
-                return BadRequest();
-            }
-
-            orderBook.Book = book;
-            orderBook.Buyer = buyer;
-            orderBook.TimeGetBook = DateTimeOffset.Now;
-
-            _mockDb.OrderBooks.Add(orderBook);
-
-            return Ok(_mockDb.OrderBooks);
+            return Ok();
         }
     }
 }
