@@ -1,4 +1,3 @@
-using BookShop.WebApi;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Hosting;
 

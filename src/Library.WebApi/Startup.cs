@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Newtonsoft.Json;
 
 namespace Library.WebApi
 {
@@ -25,7 +26,8 @@ namespace Library.WebApi
 
             services.AddJsonConverters();
             
-            services.AddControllers();
+            services.AddControllers().AddNewtonsoftJson(options => 
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
