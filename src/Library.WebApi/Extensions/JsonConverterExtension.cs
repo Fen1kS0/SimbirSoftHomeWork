@@ -6,7 +6,7 @@ namespace Library.WebApi.Extensions
     /// <summary>
     /// 1.2.1 - 4
     /// </summary>
-    public static class JsonConverterExtensions
+    public static class JsonConverterExtension
     {
         /// <summary>
         /// 1.2.1 - 4

@@ -1,3 +1,4 @@
+using Library.Core.Mappings;
 using Library.Infrastructure.Data;
 using Library.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
@@ -25,6 +26,8 @@ namespace Library.WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddJsonConverters();
+
+            services.AddMapping();
             
             services.AddControllers().AddNewtonsoftJson(options => 
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
