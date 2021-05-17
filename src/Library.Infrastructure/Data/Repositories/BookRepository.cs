@@ -1,36 +1,65 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Library.Core.Interfaces.Repositories;
 using Library.Core.Models;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infrastructure.Data.Repositories
 {
     public class BookRepository : IBookRepository
     {
+        private readonly LibraryDbContext _context;
+
+        public BookRepository(LibraryDbContext context)
+        {
+            _context = context;
+        }
+        
         public async Task<IEnumerable<Book>> GetAllBooks()
         {
-            throw new NotImplementedException();
+            IQueryable<Book> query = _context.Books;
+
+            query
+                .Include(b => b.Author)
+                .Include(b => b.Genres)
+                .Include(b => b.Readers);
+
+            return await query.ToListAsync();
         }
 
         public async Task<Book> GetBookById(Guid id)
         {
-            throw new NotImplementedException();
+            IQueryable<Book> query = _context.Books;
+
+            query
+                .Include(b => b.Author)
+                .Include(b => b.Genres)
+                .Include(b => b.Readers);
+            
+            return await query.FirstOrDefaultAsync(b => b.Id == id);
         }
 
         public async Task AddBook(Book book)
         {
-            throw new NotImplementedException();
+            await _context.Books.AddAsync(book);
         }
 
         public async Task UpdateBook(Book book)
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+                _context.Entry(book).State = EntityState.Modified;
+            });
         }
 
         public async Task DeleteBook(Book book)
         {
-            throw new NotImplementedException();
+            await Task.Run(() =>
+            {
+                _context.Books.Remove(book);
+            });
         }
     }
 }
