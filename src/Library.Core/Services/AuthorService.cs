@@ -15,7 +15,7 @@ namespace Library.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<IEnumerable<BookResponse>> GetBooksByAuthor()
+        public async Task<IEnumerable<BookResponse>> GetBooksByAuthor(Guid authorId)
         {
             throw new NotImplementedException();
         }

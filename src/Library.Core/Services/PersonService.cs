@@ -15,7 +15,7 @@ namespace Library.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<PersonResponse> GetAllPeopleByName(string name)
+        public async Task<IEnumerable<PersonResponse>> GetAllPeopleByName(string name)
         {
             throw new NotImplementedException();
         }
@@ -25,7 +25,7 @@ namespace Library.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<PersonResponse> UpdatePerson(PersonUpdateRequest personUpdateRequest)
+        public async Task<PersonResponse> UpdatePerson(Guid id, PersonUpdateRequest personUpdateRequest)
         {
             throw new NotImplementedException();
         }
@@ -40,7 +40,7 @@ namespace Library.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<BookResponse> GetBorrowedBooks(Guid personId)
+        public async Task<IEnumerable<BookResponse>> GetBorrowedBooks(Guid personId)
         {
             throw new NotImplementedException();
         }

@@ -10,6 +10,11 @@ namespace Library.Core.Services
 {
     public class BookService : IBookService
     {
+        public async Task<IEnumerable<BookResponse>> GetAllBooks()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<BookResponse> AddBook(BookAddRequest bookAddRequest)
         {
             throw new NotImplementedException();
@@ -20,7 +25,7 @@ namespace Library.Core.Services
             throw new NotImplementedException();
         }
 
-        public async Task<BookResponse> UpdateGenres(BookUpdateGenresRequest bookUpdateGenresRequest)
+        public async Task<BookResponse> UpdateGenres(Guid id, BookUpdateGenresRequest bookUpdateGenresRequest)
         {
             throw new NotImplementedException();
         }

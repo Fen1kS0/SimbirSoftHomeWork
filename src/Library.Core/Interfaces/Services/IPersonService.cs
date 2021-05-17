@@ -11,17 +11,17 @@ namespace Library.Core.Interfaces.Services
     {
         Task<IEnumerable<PersonResponse>> GetAllPeople();
         
-        Task<PersonResponse> GetAllPeopleByName(string name);
+        Task<IEnumerable<PersonResponse>> GetAllPeopleByName(string name);
 
         Task<PersonResponse> AddPerson(PersonAddRequest personAddRequest);
 
-        Task<PersonResponse> UpdatePerson(PersonUpdateRequest personUpdateRequest);
+        Task<PersonResponse> UpdatePerson(Guid id, PersonUpdateRequest personUpdateRequest);
 
         Task<PersonResponse> DeletePerson(Guid id);
 
         Task DeletePeopleByFio(PeopleDeleteByFioRequest peopleDeleteByFioRequest);
 
-        Task<BookResponse> GetBorrowedBooks(Guid personId);
+        Task<IEnumerable<BookResponse>> GetBorrowedBooks(Guid personId);
 
         Task<PersonResponse> TakeBook(Guid personId, Guid bookId);
 

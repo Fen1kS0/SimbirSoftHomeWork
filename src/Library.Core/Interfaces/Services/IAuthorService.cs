@@ -11,7 +11,7 @@ namespace Library.Core.Interfaces.Services
     {
         Task<IEnumerable<AuthorWithoutBooksResponse>> GetAllAuthors();
         
-        Task<IEnumerable<BookResponse>> GetBooksByAuthor();
+        Task<IEnumerable<BookResponse>> GetBooksByAuthor(Guid authorId);
 
         Task<AuthorResponse> AddAuthor(AuthorAddRequest authorAddRequest);
 
