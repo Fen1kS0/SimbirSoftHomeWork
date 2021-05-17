@@ -1,6 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using Library.Core.Models;
+using System.Threading.Tasks;
+using Library.Core.Interfaces.Services;
+using Library.Core.Requests.Person;
+using Library.Core.Responses.Book;
+using Library.Core.Responses.Person;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Library.WebApi.Controllers
@@ -13,22 +17,33 @@ namespace Library.WebApi.Controllers
     [Route("api/[controller]")]
     public class PeopleController : ControllerBase
     {
+        private readonly IPersonService _personService;
+
+        public PeopleController(IPersonService personService)
+        {
+            _personService = personService;
+        }
+        
         /// <summary>
         /// 1.2 - 4.a
         /// </summary>
         [HttpGet]
-        public ActionResult<IEnumerable<Person>> GetAllPeople()
+        public async Task<ActionResult<IEnumerable<PersonResponse>>> GetAllPeople()
         {
-            return Ok();
+            var response = await _personService.GetAllPeople();
+
+            return Ok(response);
         }
-        
+
         /// <summary>
         /// 1.2 - 4.c
         /// </summary>
         [HttpGet("name/{name}")]
-        public ActionResult<IEnumerable<Person>> GetAllPeopleByName(string name)
+        public async Task<ActionResult<IEnumerable<PersonResponse>>> GetAllPeopleByName(string name)
         {
-            return Ok();
+            var response = await _personService.GetAllPeopleByName(name);
+
+            return Ok(response);
         }
 
         /// <summary>
@@ -36,18 +51,62 @@ namespace Library.WebApi.Controllers
         /// 1.2.2 - 2
         /// </summary>
         [HttpPost]
-        public ActionResult<IEnumerable<Person>> CreatePeople(Person person)
+        public async Task<ActionResult<PersonResponse>> AddPerson(PersonAddRequest personAddRequest)
         {
-            return Ok();
+            var response = await _personService.AddPerson(personAddRequest);
+
+            return Ok(response);
+        }
+
+        [HttpPut("{id}")]
+        public async Task<ActionResult<PersonResponse>> UpdatePerson(Guid id, PersonUpdateRequest personUpdateRequest)
+        {
+            var response = await _personService.UpdatePerson(id, personUpdateRequest);
+
+            return Ok(response);
         }
 
         /// <summary>
         /// 1.2 - 6
         /// </summary>
         [HttpDelete("{id}")]
-        public ActionResult<Person> DeletePerson(Guid id)
+        public async Task<ActionResult<PersonResponse>> DeletePerson(Guid id)
         {
-            return Ok();
+            var response = await _personService.DeletePerson(id);
+
+            return Ok(response);
+        }
+
+        [HttpDelete("deletePeopleByFio")]
+        public async Task<IActionResult> DeletePeopleByFio(PeopleDeleteByFioRequest peopleDeleteByFioRequest)
+        {
+            await _personService.DeletePeopleByFio(peopleDeleteByFioRequest);
+
+            return NoContent();
+        }
+        
+        [HttpGet("{personId}/books")]
+        public async Task<ActionResult<IEnumerable<BookResponse>>> GetBorrowedBooks(Guid personId)
+        {
+            var response = await _personService.GetBorrowedBooks(personId);
+
+            return Ok(response);
+        }
+
+        [HttpPost("{personId}/takeBook/{bookId}")]
+        public async Task<ActionResult<PersonResponse>> TakeBook(Guid personId, Guid bookId)
+        {
+            var response = await _personService.TakeBook(personId, bookId);
+
+            return Ok(response);
+        }
+
+        [HttpPost("{personId}/returnBook/{bookId}")]
+        public async Task<ActionResult<PersonResponse>> ReturnBook(Guid personId, Guid bookId)
+        {
+            var response = await _personService.ReturnBook(personId, bookId);
+
+            return Ok(response);
         }
     }
 }
