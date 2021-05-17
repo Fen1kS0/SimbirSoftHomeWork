@@ -5,7 +5,7 @@ namespace Library.Core.Models
     /// <summary>
     /// 1.2.1 - 1
     /// </summary>
-    public class OrderBook
+    public class LibraryCard
     {
         public Guid Id { get; set; }
 
@@ -13,7 +13,7 @@ namespace Library.Core.Models
         
         public Book Book { get; set; }
 
-        public Guid BuyerId { get; set; }
+        public Guid PersonId { get; set; }
         
         public Person Person { get; set; }
         

@@ -18,5 +18,7 @@ namespace Library.Core.Models
         public Person Author { get; set; }
 
         public ICollection<Genre> Genres { get; set; } = new List<Genre>();
+
+        public ICollection<Person> Readers { get; set; } = new List<Person>();
     }
 }
