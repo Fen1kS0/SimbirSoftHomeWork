@@ -16,5 +16,7 @@ namespace Library.Core.Interfaces.Repositories
         Task UpdatePerson(Person person);
 
         Task DeletePerson(Person person);
+        
+        Task SaveChanges();
     }
 }

@@ -19,9 +19,7 @@ namespace Library.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Person>> GetAllPeople()
         {
-            IQueryable<Person> query = _context.People;
-
-            query
+            IQueryable<Person> query = _context.People
                 .Include(p => p.Books)
                 .ThenInclude(b => b.Author)
                 .Include(p => p.Books)
@@ -32,14 +30,12 @@ namespace Library.Infrastructure.Data.Repositories
 
         public async Task<Person> GetPersonById(Guid id)
         {
-            IQueryable<Person> query = _context.People;
-
-            query
+            IQueryable<Person> query = _context.People
                 .Include(p => p.Books)
                 .ThenInclude(b => b.Author)
                 .Include(p => p.Books)
                 .ThenInclude(b => b.Genres);
-            
+
             return await query.FirstOrDefaultAsync(p => p.Id == id);
         }
 
@@ -62,6 +58,11 @@ namespace Library.Infrastructure.Data.Repositories
             {
                 _context.People.Remove(person);
             });
+        }
+        
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

@@ -19,22 +19,18 @@ namespace Library.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Author>> GetAllAuthors()
         {
-            IQueryable<Author> query = _context.Authors;
-
-            query
+            var query = _context.Authors
                 .Include(a => a.Books)
                 .ThenInclude(b => b.Readers)
                 .Include(a => a.Books)
                 .ThenInclude(b => b.Genres);
-
+                
             return await query.ToListAsync();
         }
 
         public async Task<Author> GetAuthorById(Guid id)
         {
-            IQueryable<Author> query = _context.Authors;
-
-            query
+            var query = _context.Authors
                 .Include(a => a.Books)
                 .ThenInclude(b => b.Readers)
                 .Include(a => a.Books)
@@ -62,6 +58,11 @@ namespace Library.Infrastructure.Data.Repositories
             {
                 _context.Authors.Remove(author);
             });
+        }
+
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

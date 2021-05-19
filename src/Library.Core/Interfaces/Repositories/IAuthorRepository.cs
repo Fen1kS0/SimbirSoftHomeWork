@@ -16,5 +16,7 @@ namespace Library.Core.Interfaces.Repositories
         Task UpdateAuthor(Author author);
 
         Task DeleteAuthor(Author author);
+
+        Task SaveChanges();
     }
 }

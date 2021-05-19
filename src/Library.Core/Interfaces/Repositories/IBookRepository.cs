@@ -16,5 +16,7 @@ namespace Library.Core.Interfaces.Repositories
         Task UpdateBook(Book book);
 
         Task DeleteBook(Book book);
+        
+        Task SaveChanges();
     }
 }

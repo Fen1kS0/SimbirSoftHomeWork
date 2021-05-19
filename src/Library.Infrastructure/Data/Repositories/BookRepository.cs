@@ -19,21 +19,17 @@ namespace Library.Infrastructure.Data.Repositories
         
         public async Task<IEnumerable<Book>> GetAllBooks()
         {
-            IQueryable<Book> query = _context.Books;
-
-            query
+            IQueryable<Book> query = _context.Books
                 .Include(b => b.Author)
                 .Include(b => b.Genres)
                 .Include(b => b.Readers);
-
+            
             return await query.ToListAsync();
         }
 
         public async Task<Book> GetBookById(Guid id)
         {
-            IQueryable<Book> query = _context.Books;
-
-            query
+            IQueryable<Book> query = _context.Books
                 .Include(b => b.Author)
                 .Include(b => b.Genres)
                 .Include(b => b.Readers);
@@ -60,6 +56,11 @@ namespace Library.Infrastructure.Data.Repositories
             {
                 _context.Books.Remove(book);
             });
+        }
+        
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

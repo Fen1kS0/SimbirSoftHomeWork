@@ -19,22 +19,18 @@ namespace Library.Infrastructure.Data.Repositories
 
         public async Task<IEnumerable<Genre>> GetAllGenres()
         {
-            IQueryable<Genre> query = _context.Genres;
-
-            query
+            IQueryable<Genre> query = _context.Genres
                 .Include(g => g.Books)
                 .ThenInclude(b => b.Author)
                 .Include(g => g.Books)
                 .ThenInclude(b => b.Readers);
-
+            
             return await query.ToListAsync();
         }
 
         public async Task<Genre> GetGenreById(Guid id)
         {
-            IQueryable<Genre> query = _context.Genres;
-
-            query
+            IQueryable<Genre> query = _context.Genres
                 .Include(g => g.Books)
                 .ThenInclude(b => b.Author)
                 .Include(g => g.Books)
@@ -62,6 +58,11 @@ namespace Library.Infrastructure.Data.Repositories
             {
                 _context.Genres.Remove(genre);
             });
+        }
+        
+        public async Task SaveChanges()
+        {
+            await _context.SaveChangesAsync();
         }
     }
 }

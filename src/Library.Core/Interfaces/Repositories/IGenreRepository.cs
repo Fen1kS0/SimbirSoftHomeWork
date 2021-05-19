@@ -16,5 +16,7 @@ namespace Library.Core.Interfaces.Repositories
         Task UpdateGenre(Genre genre);
 
         Task DeleteGenre(Genre genre);
+        
+        Task SaveChanges();
     }
 }
