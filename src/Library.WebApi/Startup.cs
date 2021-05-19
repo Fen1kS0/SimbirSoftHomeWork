@@ -26,8 +26,9 @@ namespace Library.WebApi
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
             services.AddJsonConverters();
-
             services.AddMapping();
+            services.AddRepositories();
+            services.AddServices();
             
             services.AddControllers().AddNewtonsoftJson(options => 
                 options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
@@ -39,6 +40,8 @@ namespace Library.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseErrorMiddleware();
 
             app.UseRouting();
 
