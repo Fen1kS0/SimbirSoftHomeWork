@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace Library.WebApi.Controllers
 {
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class GenresController : ControllerBase
     {
         private readonly IGenreService _genreService;

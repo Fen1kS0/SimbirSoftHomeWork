@@ -70,7 +70,7 @@ namespace Library.WebApi.Controllers
         /// <summary>
         /// 1.2 - 4.b
         /// </summary>
-        [HttpGet("author/{authorId}")]
+        [HttpGet("author")]
         public async Task<ActionResult<IEnumerable<BookResponse>>> GetBooksByAuthor(AuthorFioRequest authorFioRequest)
         {
             var response = await _bookService.GetBooksByAuthor(authorFioRequest);
