@@ -15,7 +15,7 @@ namespace Library.Core.Models
         
         public Guid AuthorId { get; set; }
         
-        public Person Author { get; set; }
+        public Author Author { get; set; }
 
         public ICollection<Genre> Genres { get; set; } = new List<Genre>();
 

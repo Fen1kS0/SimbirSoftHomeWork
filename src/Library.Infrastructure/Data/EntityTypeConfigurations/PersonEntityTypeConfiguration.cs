@@ -22,7 +22,7 @@ namespace Library.Infrastructure.Data.EntityTypeConfigurations
                     j => j
                         .HasOne(lr => lr.Book)
                         .WithMany()
-                        .HasForeignKey(lr => lr.PersonId),
+                        .HasForeignKey(lr => lr.BookId),
                     j => j
                         .HasOne(lr => lr.Person)
                         .WithMany()
