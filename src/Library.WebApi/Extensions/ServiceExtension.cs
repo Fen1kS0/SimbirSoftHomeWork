@@ -12,6 +12,7 @@ namespace Library.WebApi.Extensions
             services.AddScoped<IBookService, BookService>();
             services.AddScoped<IGenreService, GenreService>();
             services.AddScoped<IPersonService, PersonService>();
+            services.AddScoped<IFindAuthorsService, FindAuthorsService>();
 
             return services;
         }
