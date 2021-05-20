@@ -1,34 +1,35 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using Library.Core.Entities;
 using Library.Core.Exceptions;
+using Library.Core.General;
 using Library.Core.Interfaces.Repositories;
 using Library.Core.Interfaces.Services;
 using Library.Core.Requests.Author;
 using Library.Core.Requests.Book;
 using Library.Core.Responses.Book;
+using Library.Core.UoW;
+using Microsoft.EntityFrameworkCore;
 
 namespace Library.Core.Services
 {
     public class BookService : IBookService
     {
         private readonly IMapper _mapper;
-        private readonly IBookRepository _bookRepository;
-        private readonly IGenreRepository _genreRepository;
+        private readonly IUnitOfWork _unitOfWork;
 
-        public BookService(IMapper mapper, IBookRepository bookRepository, IGenreRepository genreRepository)
+        public BookService(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
-            _bookRepository = bookRepository;
-            _genreRepository = genreRepository;
+            _unitOfWork = unitOfWork;
         }
 
         public async Task<IEnumerable<BookResponse>> GetAllBooks()
         {
-            var books = await _bookRepository.GetAllBooks();
+            var books = await _unitOfWork.GetRepository<IBookRepository>()
+                .GetAllBooks(include: IncludeEntities.IncludeAllForBook);
 
             return _mapper.Map<IEnumerable<BookResponse>>(books);
         }
@@ -37,15 +38,16 @@ namespace Library.Core.Services
         {
             var book = _mapper.Map<Book>(bookAddRequest);
             
-            await _bookRepository.AddBook(book);
-            await _bookRepository.SaveChanges();
+            await _unitOfWork.GetRepository<IBookRepository>().AddBook(book);
+            await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<BookResponse>(book);
         }
 
         public async Task<BookResponse> DeleteBook(Guid id)
         {
-            var book = await _bookRepository.GetBookById(id);
+            var book = await _unitOfWork.GetRepository<IBookRepository>()
+                .GetBookById(id, q => q.Include(b => b.Readers));
             
             if (book == null)
             {
@@ -57,15 +59,16 @@ namespace Library.Core.Services
                 throw new BadRequestException("This book is with the person");
             }
             
-            await _bookRepository.DeleteBook(book);
-            await _bookRepository.SaveChanges();
+            await _unitOfWork.GetRepository<IBookRepository>().DeleteBook(book);
+            await _unitOfWork.SaveChangesAsync();
 
             return _mapper.Map<BookResponse>(book);
         }
 
         public async Task<BookResponse> UpdateGenres(Guid id, BookUpdateGenresRequest bookUpdateGenresRequest)
         {
-            var book = await _bookRepository.GetBookById(id);
+            var book = await _unitOfWork.GetRepository<IBookRepository>()
+                .GetBookById(id, q => q.Include(b => b.Genres), false);
             
             if (book == null)
             {
@@ -76,7 +79,8 @@ namespace Library.Core.Services
 
             foreach (Guid genreId in bookUpdateGenresRequest.GenresId)
             {
-                var genre = await _genreRepository.GetGenreById(genreId);
+                var genre = await _unitOfWork.GetRepository<IGenreRepository>()
+                    .GetGenreById(genreId, disableTracking: false);
 
                 if (genre == null)
                 {
@@ -88,27 +92,30 @@ namespace Library.Core.Services
 
             book.Genres = genres;
 
-            await _bookRepository.UpdateBook(book);
-            await _bookRepository.SaveChanges();
-
+            await _unitOfWork.GetRepository<IBookRepository>().UpdateBook(book);
+            await _unitOfWork.SaveChangesAsync();
+            
             return _mapper.Map<BookResponse>(book);
         }
 
         public async Task<IEnumerable<BookResponse>> GetBooksByAuthor(AuthorFioRequest authorFioRequest)
         {
-            var books = await _bookRepository.GetAllBooks();
+            var books = await _unitOfWork.GetRepository<IBookRepository>()
+                .GetAllBooks(
+                    predicate: b => 
+                        b.Author.FirstName == (authorFioRequest.FirstName ?? b.Author.FirstName)
+                        && b.Author.LastName == (authorFioRequest.LastName ?? b.Author.LastName)
+                        && b.Author.MiddleName == (authorFioRequest.MiddleName ?? b.Author.MiddleName),
+                    include: IncludeEntities.IncludeAllForBook
+                    );
 
-            books = books.Where(b => 
-                b.Author.FirstName == (authorFioRequest.FirstName ?? b.Author.FirstName)
-                && b.Author.LastName == (authorFioRequest.LastName ?? b.Author.LastName)
-                && b.Author.MiddleName == (authorFioRequest.MiddleName ?? b.Author.MiddleName));
-            
             return _mapper.Map<IEnumerable<BookResponse>>(books);
         }
 
         public async Task<IEnumerable<BookResponse>> GetBooksByGenre(Guid genreId)
         {
-            var genre = await _genreRepository.GetGenreById(genreId);
+            var genre = await _unitOfWork.GetRepository<IGenreRepository>()
+                .GetGenreById(genreId, IncludeEntities.IncludeAllForGenre);
 
             if (genre == null)
             {
