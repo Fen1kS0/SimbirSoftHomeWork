@@ -52,6 +52,11 @@ namespace Library.Core.Services
                 throw new NotFoundException($"Book with id {id} not found");
             }
             
+            if (book.Readers.Count != 0)
+            {
+                throw new BadRequestException("This book is with the person");
+            }
+            
             await _bookRepository.DeleteBook(book);
             await _bookRepository.SaveChanges();
 

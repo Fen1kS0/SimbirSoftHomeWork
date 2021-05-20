@@ -66,6 +66,11 @@ namespace Library.Core.Services
                 throw new NotFoundException($"Author with id {id} not found");
             }
             
+            if (author.Books.Count != 0)
+            {
+                throw new BadRequestException("You can't delete an author while there are his books");
+            }
+            
             await _authorRepository.DeleteAuthor(author);
             await _authorRepository.SaveChanges();
 

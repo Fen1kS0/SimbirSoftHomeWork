@@ -59,7 +59,7 @@ namespace Library.WebApi.Controllers
             return Ok(response);
         }
 
-        [HttpPut("{id}")]
+        [HttpPut("{id}/genres")]
         public async Task<ActionResult<BookResponse>> UpdateGenres(Guid id, BookUpdateGenresRequest bookUpdateGenresRequest)
         {
             var response = await _bookService.UpdateGenres(id, bookUpdateGenresRequest);
