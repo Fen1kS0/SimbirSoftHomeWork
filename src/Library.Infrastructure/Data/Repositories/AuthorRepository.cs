@@ -1,71 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Library.Core.Entities;
 using Library.Core.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Library.Infrastructure.Data.Repositories
 {
     public class AuthorRepository : IAuthorRepository
     {
-        private readonly LibraryDbContext _context;
+        private readonly IGenericRepository<Author> _genericRepository;
 
         public AuthorRepository(LibraryDbContext context)
         {
-            _context = context;
+            _genericRepository = new GenericRepository<Author>(context.Authors);
         }
 
-        public async Task<IEnumerable<Author>> GetAllAuthors()
+        public async Task<IEnumerable<Author>> GetAllAuthors(
+            Expression<Func<Author, bool>> predicate = null, 
+            Func<IQueryable<Author>, IOrderedQueryable<Author>> orderBy = null, 
+            Func<IQueryable<Author>, IIncludableQueryable<Author, object>> include = null, 
+            bool disableTracking = true
+            )
         {
-            var query = _context.Authors
-                .Include(a => a.Books)
-                .ThenInclude(b => b.Readers)
-                .Include(a => a.Books)
-                .ThenInclude(b => b.Genres);
-                
-            return await query.ToListAsync();
+            return await _genericRepository.GetAllAsync(predicate, orderBy, include, disableTracking);
         }
 
-        public async Task<Author> GetAuthorById(Guid id)
+        public async Task<Author> GetAuthorById(
+            Guid id, 
+            Func<IQueryable<Author>, IIncludableQueryable<Author, object>> include = null, 
+            bool disableTracking = true
+            )
         {
-            var query = _context.Authors
-                .Include(a => a.Books)
-                .ThenInclude(b => b.Readers)
-                .Include(a => a.Books)
-                .ThenInclude(b => b.Genres);
-
-            return await query.FirstOrDefaultAsync(a => a.Id == id);
+            return await _genericRepository.GetEntityByIdAsync(id, include, disableTracking);
         }
 
         public async Task AddAuthor(Author author)
         {
-            await _context.Authors.AddAsync(author);
+            await _genericRepository.AddEntityAsync(author);
         }
 
         public async Task UpdateAuthor(Author author)
         {
-            await Task.Run(() =>
-            {
-                author.LastUpdateRecordDate = DateTimeOffset.Now;
-                author.Version++;
-
-                _context.Authors.Update(author);
-            });
+            await _genericRepository.UpdateEntityAsync(author);
         }
 
         public async Task DeleteAuthor(Author author)
         {
-            await Task.Run(() =>
-            {
-                _context.Authors.Remove(author);
-            });
-        }
-
-        public async Task SaveChanges()
-        {
-            await _context.SaveChangesAsync();
+            await _genericRepository.DeleteEntityAsync(author);
         }
     }
 }

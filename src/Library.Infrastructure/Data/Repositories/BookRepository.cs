@@ -1,69 +1,55 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Threading.Tasks;
 using Library.Core.Entities;
 using Library.Core.Interfaces.Repositories;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Query;
 
 namespace Library.Infrastructure.Data.Repositories
 {
     public class BookRepository : IBookRepository
     {
-        private readonly LibraryDbContext _context;
+        private readonly IGenericRepository<Book> _genericRepository;
 
         public BookRepository(LibraryDbContext context)
         {
-            _context = context;
+            _genericRepository = new GenericRepository<Book>(context.Books);
         }
         
-        public async Task<IEnumerable<Book>> GetAllBooks()
+        public async Task<IEnumerable<Book>> GetAllBooks(
+            Expression<Func<Book, bool>> predicate = null, 
+            Func<IQueryable<Book>, IOrderedQueryable<Book>> orderBy = null, 
+            Func<IQueryable<Book>, IIncludableQueryable<Book, object>> include = null, 
+            bool disableTracking = true
+            )
         {
-            IQueryable<Book> query = _context.Books
-                .Include(b => b.Author)
-                .Include(b => b.Genres)
-                .Include(b => b.Readers);
-            
-            return await query.ToListAsync();
+            return await _genericRepository.GetAllAsync(predicate, orderBy, include, disableTracking);
         }
 
-        public async Task<Book> GetBookById(Guid id)
+        public async Task<Book> GetBookById(
+            Guid id, 
+            Func<IQueryable<Book>, IIncludableQueryable<Book, object>> include = null, 
+            bool disableTracking = true
+            )
         {
-            IQueryable<Book> query = _context.Books
-                .Include(b => b.Author)
-                .Include(b => b.Genres)
-                .Include(b => b.Readers);
-            
-            return await query.FirstOrDefaultAsync(b => b.Id == id);
+            return await _genericRepository.GetEntityByIdAsync(id, include, disableTracking);
         }
 
         public async Task AddBook(Book book)
         {
-            await _context.Books.AddAsync(book);
+            await _genericRepository.AddEntityAsync(book);
         }
 
         public async Task UpdateBook(Book book)
         {
-            await Task.Run(() =>
-            {
-                book.LastUpdateRecordDate = DateTimeOffset.Now;
-                book.Version++;
-                
-                _context.Entry(book).State = EntityState.Modified;
-            });
+            await _genericRepository.UpdateEntityAsync(book);
         }
 
         public async Task DeleteBook(Book book)
         {
-            await Task.Run(() =>
-            {
-                _context.Books.Remove(book);
-            });
-        }
-        
-        public async Task SaveChanges()
-        {
-            await _context.SaveChangesAsync();
+            await _genericRepository.DeleteEntityAsync(book);
         }
     }
 }
