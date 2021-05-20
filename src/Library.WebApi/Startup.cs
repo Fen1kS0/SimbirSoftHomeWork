@@ -29,9 +29,6 @@ namespace Library.WebApi
             services.AddMapping();
             services.AddRepositories();
             services.AddServices();
-            
-            services.AddControllers().AddNewtonsoftJson(options => 
-                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore);
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

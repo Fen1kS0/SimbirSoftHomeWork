@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Globalization;
-using System.Text.Json;
-using System.Text.Json.Serialization;
+using Newtonsoft.Json;
 
 namespace Library.WebApi.Convertors
 {
@@ -10,24 +9,25 @@ namespace Library.WebApi.Convertors
     /// </summary>
     public class DateTimeJsonConverter : JsonConverter<DateTime>
     {
-        public override DateTime Read(
-            ref Utf8JsonReader reader, 
-            Type typeToConvert, 
-            JsonSerializerOptions options
-        )
+        public override void WriteJson(
+            JsonWriter writer, 
+            DateTime value, 
+            JsonSerializer serializer)
         {
-            return DateTime.ParseExact(reader.GetString(),
-                "yyyy-MM-dd", CultureInfo.InvariantCulture);
+            writer.WriteValue(value.ToString(
+                "yyyy-MM-dd", CultureInfo.InvariantCulture));
         }
 
-        public override void Write(
-            Utf8JsonWriter writer, 
-            DateTime value, 
-            JsonSerializerOptions options
-        )
+        public override DateTime ReadJson(
+            JsonReader reader,
+            Type objectType, 
+            DateTime existingValue, 
+            bool hasExistingValue,
+            JsonSerializer serializer
+            )
         {
-            writer.WriteStringValue(value.ToString(
-                "yyyy-MM-dd", CultureInfo.InvariantCulture));
+            return DateTime.ParseExact((string) reader.Value,
+                "yyyy-MM-dd", CultureInfo.InvariantCulture);
         }
     }
 }

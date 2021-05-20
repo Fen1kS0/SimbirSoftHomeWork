@@ -1,5 +1,6 @@
 ﻿using Library.WebApi.Convertors;
 using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 
 namespace Library.WebApi.Extensions
 {
@@ -13,10 +14,12 @@ namespace Library.WebApi.Extensions
         /// </summary>
         public static IServiceCollection AddJsonConverters(this IServiceCollection services)
         {
-            services.AddMvc().AddJsonOptions(options =>
+            services.AddControllers().AddNewtonsoftJson(options =>
             {
-                options.JsonSerializerOptions.Converters.Add(new DateTimeOffsetJsonConverter());
-                options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
+                options.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
+                
+                options.SerializerSettings.Converters.Add(new DateTimeOffsetJsonConverter());
+                options.SerializerSettings.Converters.Add(new DateTimeJsonConverter());
             });
 
             return services;
