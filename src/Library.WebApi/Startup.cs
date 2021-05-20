@@ -32,6 +32,8 @@ namespace Library.WebApi
             services.AddRepositories();
             services.AddServices();
             services.AddScoped<IUnitOfWork, UnitOfWork>();
+            
+            services.AddSwaggerGen();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -43,6 +45,14 @@ namespace Library.WebApi
 
             app.UseErrorMiddleware();
 
+            app.UseSwagger();
+            
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
+            });
+            
             app.UseRouting();
 
             app.UseEndpoints(endpoints =>

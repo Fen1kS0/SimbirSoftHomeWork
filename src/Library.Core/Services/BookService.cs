@@ -68,7 +68,7 @@ namespace Library.Core.Services
         public async Task<BookResponse> UpdateGenres(Guid id, BookUpdateGenresRequest bookUpdateGenresRequest)
         {
             var book = await _unitOfWork.GetRepository<IBookRepository>()
-                .GetBookById(id, q => q.Include(b => b.Genres), false);
+                .GetBookById(id, IncludeEntities.IncludeAllForBook, false);
             
             if (book == null)
             {
