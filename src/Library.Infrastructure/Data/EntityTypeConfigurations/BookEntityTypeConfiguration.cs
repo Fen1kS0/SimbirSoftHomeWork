@@ -1,4 +1,4 @@
-﻿using Library.Core.Models;
+﻿using Library.Core.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,6 +10,10 @@ namespace Library.Infrastructure.Data.EntityTypeConfigurations
         {
             builder.ToTable("Books");
             builder.HasKey(b => b.Id);
+            
+            builder.Property(b => b.CreateRecordDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(b => b.LastUpdateRecordDate).HasDefaultValueSql("CURRENT_TIMESTAMP");
+            builder.Property(b => b.Version).HasDefaultValue(1);
             
             builder.Property(b => b.Name).IsRequired();
 

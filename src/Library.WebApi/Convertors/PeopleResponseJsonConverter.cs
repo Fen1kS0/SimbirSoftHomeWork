@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using Library.Core.Models;
+using Library.Core.Entities;
 
 namespace Library.WebApi.Convertors
 {

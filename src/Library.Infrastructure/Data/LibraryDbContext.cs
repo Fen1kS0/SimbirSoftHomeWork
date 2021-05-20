@@ -1,4 +1,4 @@
-﻿using Library.Core.Models;
+﻿using Library.Core.Entities;
 using Library.Infrastructure.Data.EntityTypeConfigurations;
 using Microsoft.EntityFrameworkCore;
 

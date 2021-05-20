@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Library.Core.Models
+namespace Library.Core.Entities
 {
     /// <summary>
     /// 1.2 - 2
     /// 1.2.2 - 1
     /// </summary>
-    public class Author
+    public class Author : BaseEntity
     {
-        public Guid Id { get; set; }
-        
         public string FirstName { get; set; }
         
         public string LastName { get; set; }

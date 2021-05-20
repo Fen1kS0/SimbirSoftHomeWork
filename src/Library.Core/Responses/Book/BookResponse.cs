@@ -15,6 +15,8 @@ namespace Library.Core.Responses.Book
         
         public AuthorResponse Author { get; set; }
         
+        public DateTime RealiseDate { get; set; }
+        
         public ICollection<GenreResponse> Genres { get; set; }
     }
 }

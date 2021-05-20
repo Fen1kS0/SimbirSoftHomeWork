@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Library.Core.Models;
+using Library.Core.Entities;
 
 namespace Library.Core.Interfaces.Repositories
 {

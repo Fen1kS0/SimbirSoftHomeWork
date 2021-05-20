@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using AutoMapper;
+using Library.Core.Entities;
 using Library.Core.Exceptions;
 using Library.Core.Interfaces.Repositories;
 using Library.Core.Interfaces.Services;
-using Library.Core.Models;
 using Library.Core.Requests.Genre;
 using Library.Core.Responses.Book;
 using Library.Core.Responses.Genre;

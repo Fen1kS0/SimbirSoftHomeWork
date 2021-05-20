@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using Library.Core.Models;
+using Library.Core.Entities;
 using Library.Core.Requests.Book;
 using Library.Core.Responses.Book;
 

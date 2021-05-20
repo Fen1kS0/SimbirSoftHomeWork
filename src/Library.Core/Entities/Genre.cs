@@ -1,12 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Library.Core.Models
+namespace Library.Core.Entities
 {
-    public class Genre
+    public class Genre : BaseEntity
     {
-        public Guid Id { get; set; }
-
         public string Name { get; set; }
 
         public ICollection<Book> Books { get; set; } = new List<Book>();

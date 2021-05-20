@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Library.Core.Entities;
 using Library.Core.Interfaces.Repositories;
-using Library.Core.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace Library.Infrastructure.Data.Repositories
@@ -46,6 +46,9 @@ namespace Library.Infrastructure.Data.Repositories
         {
             await Task.Run(() =>
             {
+                book.LastUpdateRecordDate = DateTimeOffset.Now;
+                book.Version++;
+                
                 _context.Entry(book).State = EntityState.Modified;
             });
         }

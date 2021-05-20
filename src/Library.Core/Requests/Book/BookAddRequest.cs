@@ -7,5 +7,7 @@ namespace Library.Core.Requests.Book
         public string Name { get; set; }
 
         public Guid AuthorId { get; set; }
+        
+        public DateTime RealiseDate { get; set; }
     }
 }

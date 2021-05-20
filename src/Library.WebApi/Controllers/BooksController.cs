@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Library.Core.Entities;
 using Library.Core.Interfaces.Services;
-using Library.Core.Models;
 using Library.Core.Requests.Author;
 using Library.Core.Requests.Book;
 using Library.Core.Responses.Book;

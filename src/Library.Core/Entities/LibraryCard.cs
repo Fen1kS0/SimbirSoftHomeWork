@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Library.Core.Models
+namespace Library.Core.Entities
 {
     /// <summary>
     /// 1.2.1 - 1
