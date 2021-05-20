@@ -1,5 +1,7 @@
 using Library.Core.Mappings;
+using Library.Core.UoW;
 using Library.Infrastructure.Data;
+using Library.Infrastructure.Data.UoW;
 using Library.WebApi.Extensions;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -29,6 +31,7 @@ namespace Library.WebApi
             services.AddMapping();
             services.AddRepositories();
             services.AddServices();
+            services.AddScoped<IUnitOfWork, UnitOfWork>();
         }
         
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
