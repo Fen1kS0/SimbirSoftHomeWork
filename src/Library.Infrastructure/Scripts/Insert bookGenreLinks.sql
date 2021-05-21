@@ -1,0 +1,7 @@
+USE TestDB;
+INSERT INTO Book_genre_links 
+VALUES
+('46c1d745-9392-47a6-838f-6d94b2fe55db', 'fd5849b5-b8be-4df7-ac6a-6b3a4489d3ef'),
+('64330e4f-92d3-4993-bd6b-7238cfe93d5d', '9c984483-64b5-4566-b5aa-29de53b31fa7'),
+('b27071d3-4f0d-433e-8f02-33b9afe00472', 'db081f02-ade1-420a-bd13-67d071f7875b'),
+('b27071d3-4f0d-433e-8f02-33b9afe00472', '9c984483-64b5-4566-b5aa-29de53b31fa7')
