@@ -9,13 +9,13 @@ namespace Library.WebApi.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class FindAuthorsController : ControllerBase
+    public class FinderAuthorsController : ControllerBase
     {
-        private readonly IFindAuthorsService _findAuthorsService;
+        private readonly IFinderAuthorsService _finderAuthorsService;
 
-        public FindAuthorsController(IFindAuthorsService findAuthorsService)
+        public FinderAuthorsController(IFinderAuthorsService finderAuthorsService)
         {
-            _findAuthorsService = findAuthorsService;
+            _finderAuthorsService = finderAuthorsService;
         }
 
         [HttpGet("bookRealiseDate")]
@@ -24,7 +24,7 @@ namespace Library.WebApi.Controllers
             [FromQuery] SortMode sortMode
             )
         {
-            var response = await _findAuthorsService.GetAuthorsByRealiseDateBook(year, sortMode);
+            var response = await _finderAuthorsService.GetAuthorsByRealiseDateBook(year, sortMode);
 
             return Ok(response);
         }
@@ -34,7 +34,7 @@ namespace Library.WebApi.Controllers
             [FromQuery] string substring
             )
         {
-            var response = await _findAuthorsService.FindAuthorBySubstringBookName(substring);
+            var response = await _finderAuthorsService.FindAuthorBySubstringBookName(substring);
 
             return Ok(response);
         }

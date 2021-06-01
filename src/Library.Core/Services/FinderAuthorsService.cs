@@ -13,12 +13,12 @@ using Library.Core.UoW;
 
 namespace Library.Core.Services
 {
-    public class FindAuthorsService : IFindAuthorsService
+    public class FinderAuthorsService : IFinderAuthorsService
     {
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public FindAuthorsService(IMapper mapper, IUnitOfWork unitOfWork)
+        public FinderAuthorsService(IMapper mapper, IUnitOfWork unitOfWork)
         {
             _mapper = mapper;
             _unitOfWork = unitOfWork;
@@ -31,10 +31,10 @@ namespace Library.Core.Services
             switch (sortMode)
             {
                 case SortMode.Increase:
-                    orderBy = q=> q.OrderBy(a => a.FirstName);
+                    orderBy = q=> q.OrderBy(a => a, new AuthorNameComparer());
                     break;
                 case SortMode.Decrease:
-                    orderBy = q=> q.OrderByDescending(a => a.FirstName);
+                    orderBy = q=> q.OrderByDescending(a => a, new AuthorNameComparer());
                     break;
             }
             

@@ -5,7 +5,7 @@ using Library.Core.Responses.Author;
 
 namespace Library.Core.Interfaces.Services
 {
-    public interface IFindAuthorsService
+    public interface IFinderAuthorsService
     {
         Task<IEnumerable<AuthorWithoutBooksResponse>> GetAuthorsByRealiseDateBook(int year, SortMode sortMode);
         
